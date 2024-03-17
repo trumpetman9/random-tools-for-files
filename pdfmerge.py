@@ -28,8 +28,9 @@ def extract_pdfs_from_folder(path_name):
         return pdfs
     for file in path.iterdir():
         # recursively search through every sub-folder
-        # if file.is_dir():
-        #    pdfs += extract_pdfs_from_folder(file.name)
+        if file.is_dir():
+            # print(file.name)
+            pdfs += extract_pdfs_from_folder(path_name + '/' + file.name)
         if file.suffix.lower() == '.pdf':
             pdfs.append(str(file.resolve()))
     return pdfs
