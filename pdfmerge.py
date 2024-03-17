@@ -1,7 +1,5 @@
 from sys import argv, exit
 from pathlib import Path
-
-import PyPDF2
 from PyPDF2 import PdfWriter
 
 
@@ -12,10 +10,10 @@ def merge(pdf_list, output_name, destination):
     if len(pdf_list) < 2:
         print("Invalid argument(s): Need at least two files to merge")
         return None
-    merger = PyPDF2.PdfMerger
+    merger = PdfWriter()
     for path in pdf_list:
-        with open(path, 'rb') as fileobj:
-            merger.append(fileobj)
+        with open(path, 'rb') as file_obj:
+            merger.append(file_obj)
     new_path = destination / output_name
     with open(new_path, 'wb') as output_file:
         merger.write(output_file)
